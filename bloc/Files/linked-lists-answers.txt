@@ -1,0 +1,212 @@
+###Exercises
+
+>What are some pros and cons of using linked lists instead of arrays?
+
+Linked lists can be stored anywhere in available memory, so that memory isn't tied up 
+storing an ordered array. However, elements in a linked list can only be searched from
+beginning to end, rather than by index like with an array, so search times might take longer.
+
+
+>Come up with a real world example of a linked list.
+
+To me, a linked list sounds like a scavenger hunt. Each clue points toward the next clue, until 
+you get to the answer at the end. You can't skip to a clue out of order (without cheating),  
+you can only start at the beginning and go forward.
+
+###Programming Questions
+
+>The linked list push function should take a value, create a node, and add it to the end of a list. 
+Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. 
+Submit both an explanation of the bug and a functional implementation of the method.
+
+
+#Original
+
+```
+FUNCTION push(element)
+
+CREATE node
+
+SET node.value TO element
+
+SET node.next TO null
+
+IF the head node does not exist
+
+ THEN SET head to node
+
+ELSE
+
+ SET current to head
+
+ SET current.next to node
+
+END IF
+
+END FUNCTION
+
+```
+
+The pseudocode above does not include a while loop to control the program's movement from node to node. We
+can add a while loop at the end of the the conditional statement.
+
+#Refactored Pseudocode
+
+```
+//FUNCTION push(element)
+
+//CREATE node
+
+//SET node.value TO element
+
+//SET node.next TO null
+
+//IF the head node does not exist
+
+ //THEN SET head to node
+
+//ELSE
+
+ //SET current to head
+
+ //SET current.next to node
+
+//WHILE current.next is NOT null
+//SET current to current.next
+//END WHILE
+//END IF
+//END FUNCTION
+
+```
+
+#Functional Implementation
+
+```
+LinkedList.prototype.push = function(value) {
+  var node = {
+    value: value,
+    next: null
+  }
+  if(!this.head){
+    this.head = node;
+    this.length += 1;
+    return node;
+  }
+  else{
+    current = this.head;
+    while (current.next){
+      current = current.next;
+  }
+
+  current.next = node;
+  this.length += 1;
+  return node
+  }
+}
+
+```
+>Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example:
+```
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+```
+
+>Given an unsorted singly linked list, reverse it.
+Example
+```
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+```
+
+#Code
+
+```
+
+
+class LinkedList{
+  constructor(){
+    this.head = null;
+    this.length = 0;
+  }
+}
+
+LinkedList.prototype.push = function(value){
+  var node = {
+    value: value,
+    next: null
+  }
+
+  if(!this.head){
+    this.head = node;
+    this.length += 1;
+    return node;
+  }
+  else{
+    current = this.head;
+    while(current.next){
+      current = current.next;
+    }
+    current.next = node;
+    this.length += 1;
+    return node;
+  }
+}
+
+LinkedList.prototype.removeDuplicate = function(){
+  if (!this.head || !this.head.next){
+    console.log("No duplicates to remove");
+  }
+
+  var thisNode = this.head;
+  while (thisNode != null){
+    var previousNode = thisNode;
+    var nextNode = thisNode.next;
+    while (nextNode != null) {
+      if (thisNode.value == nextNode.value){
+        previousNode.next = nextNode.next;
+        this.length--;
+      } else{
+        previousNode = nextNode;
+      }
+      nextNode = nextNode.next;
+    }
+    thisNode = thisNode.next;
+  }
+  return this;
+}
+
+LinkedList.prototype.find = function(tempNode, searchValue){
+  tempNode = this.head;
+  while (tempNode && !tempNode.searchValue == searchValue){
+    tempNode = tempNode.next;
+  }
+  return tempNode;
+}
+
+LinkedList.prototype.reverse = function(){
+  var previousNode = null;
+  var thisNode = this.head;
+  var nextNode;
+
+  while(thisNode){
+    nextNode = thisNode.next;
+    thisNode.next = previousNode;
+    previousNode = thisNode;
+    thisNode = nextNode;
+  }
+
+  this.head = previousNode;
+}
+
+myList = new LinkedList()
+myList.push("apple");
+myList.push("banana");
+myList.push("clementine");
+myList.push("dragonfruit");
+myList.push("eggplant");
+myList.push("fruit");
+myList.reverse();
+(myList.find("eggplant"));
+
+```

@@ -1,0 +1,472 @@
+###Exercises
+
+
+>What is a hash table?
+
+A type of data structure that stores each value by linking it to a key, forming a key-value pair, just like a JavaScript object.
+Each keymust be unique so that each value can be looked up by it's unique key. Hash tables store these key-value pairs by placing
+them at a particular location in an array maintained internally in the hash table.
+
+>What is hashing?
+
+Hashing is the conversion from a string to a numerical index. A hashing function is used to convert the key to a specific, fixed-length
+number, referred to as a hash code. Once a hash table has a hash code it can use as a key, it can figure out where to place they key-value pair
+in its internal array.
+
+>How does a hash table store data?
+
+A hash table stores data internally as an array with values associated each with a distinct key that has been converted to a string of numerical values.
+
+>How are hash tables and objects different?
+
+Objects are different from hash tables in the way that apples are different from granny smith apples: one is a subset of the other defined by particular qualities.
+Hash tables offer the advantage of the ability to handle cases in which a key coresp9onds with a native object attribute and provides constant time lookup. 
+
+>Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+*A list of pets and their unique names.
+
+Hash table
+
+*The name, age, and the birthday of your best friend.
+
+Object
+
+*The name and location of every company in a given city.
+
+Hash table
+
+*All of the books checked out from a library by a particular individual.
+
+Object
+
+*The primary and secondary phone numbers for a contact.
+
+Object
+
+###Programming Questions
+
+>Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system 
+and look up customers using their phone numbers.
+
+```
+var HashTable = function(limit = 8){
+  this.limit = limit;
+  this.storage = [];
+  this.count = 0;
+}
+
+//this.storage = [/*container*/[/*bucket/], [/*tuple/], []]]
+
+//Hashing function example implementation
+
+HashTable.prototype.insert = function(key, value) {
+  //create an index for our storage location by passing it through the hashing function
+  var index = this.hashFunction(key, this.limit);
+  //retrieve the bucket at this particular index in our storage
+  //[[ [k, v], [k, v], ], [ [k, v], [k, v] ] [ [k, v] ] ]
+  var bucket = this.storage[index]
+  //does a bucket exist or do we get undefined?
+  if(!bucket) {
+    //create the bucket
+    var bucket = [];
+    //insert the bucket into our hashTable
+    this.storage[index] = bucket;
+  }
+
+  var override = false; 
+  //iterate through the bucket to see if there are any conflicting key value pairs in the bucket
+  //if there are, override them
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      //override value stored at this key
+      tuple[1] = value;
+      override = true;
+    }
+  }
+
+  if (!override) {
+    //create a new tuple in the bucket
+    //note that this could either be the new empty bucket or a bucket with other tuples with keys that are different than the key of the tuple we are inserting
+    //These tuples are in the bucket because their keys all equate to the same index when passing through the hasing function
+    bucket.push([key, value]);
+    this.count++
+    //now that the new key value pair is added to storage, check to see if we need to resize the storage
+    if (this.count > this.limit * 0.75){
+      this.resize(this.limit*2);
+    }
+  }
+  return this;
+};
+
+HashTable.prototype.remove = function(key) {
+  var index = this.hashFunction(key, this.limit);
+  var bucket= this.storage[index];
+  if (!bucket){
+    return null;
+  }
+  //iterate over the bucket
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    //check to see if key is inside bucket
+    if (tuple[0] === key) {
+      //if it is, get rid of this tuple
+      bucket.splice(i, 1);
+      this.count --;
+      if (this.count < this.limit * 0.25) {
+        this.resize(this.limit / 2);
+      }
+      return tuple[1];
+    }
+  }
+};
+
+HashTable.prototype.retrieve = function(key) {
+  var index = this.hashFunction(key, this.limit);
+  var bucket = this.storage[index];
+
+  if (!bucket) {
+    return null;
+  }
+  
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      return ("Name: " + tuple[1][0] + " Address: " + tuple[1][1]);
+    }
+  }
+  return null;
+};
+
+HashTable.prototype.hashFunction = function(str, max) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    var letter = str[i];
+    hash = (hash << 5) + letter.charCodeAt(0);
+    hash = (hash & hash) % max;
+  }
+  return hash;
+}
+
+HashTable.prototype.resize = function(newLimit) {
+  var oldStorage = this.storage;
+
+  this.limit = newLimit;
+  this.count = 0;
+  this.storage = [];
+
+  oldStorage.forEach(function(bucket){
+    if (!bucket) {
+      return;
+    }
+    for (var i = 0; i < bucket.length; i++) {
+      var tuple = bucket[i];
+      this.insert(tuple[0], tuple[1]);
+    }
+  }.bind(this));
+};
+
+HashTable.prototype.retrieveAll = function(){
+  console.log(this.storage);
+  //console.log(this.limit);
+};
+
+/*************************************TESTS*******************************/
+
+var myHashTable = new HashTable();
+
+myHashTable.insert('555-123-1234', ['Ally Sheedy', '12 Grimmauld Place, London UK']);
+
+myHashTable.insert('555-123-2345', ['Judd Nelson', '10 Downing Street, London UK']);
+
+myHashTable.insert('555-123-3456', ['Molly Ringwald', '800 Pennsylvania Avenue, Washington D.C. USA']);
+
+myHashTable.insert('555-123-4567', ['Anthony Michael Hall', '4 Privet Drive, Little Whinging, UK']).insert('555-123-5678', ['Emilio Estevez', 'The Land Down Under, Gold Coast, AUS']);
+
+myHashTable.retrieve('555-123-1234');//returns 'Ally Sheedy'
+myHashTable.retrieve('555-123-3456');//returns 'Molly Ringwald'
+
+```
+
+>Create a hash table that allows a store owner to track their store's inventory and quantity.
+
+```
+
+var HashTable = function(limit = 8){
+  this.limit = limit;
+  this.storage = [];
+  this.count = 0;
+}
+
+//this.storage = [/*container*/[/*bucket/], [/*tuple/], []]]
+
+//Hashing function example implementation
+
+HashTable.prototype.insert = function(key, value) {
+  //create an index for our storage location by passing it through the hashing function
+  var index = this.hashFunction(key, this.limit);
+  //retrieve the bucket at this particular index in our storage
+  //[[ [k, v], [k, v], ], [ [k, v], [k, v] ] [ [k, v] ] ]
+  var bucket = this.storage[index]
+  //does a bucket exist or do we get undefined?
+  if(!bucket) {
+    //create the bucket
+    var bucket = [];
+    //insert the bucket into our hashTable
+    this.storage[index] = bucket;
+  }
+
+  var override = false; 
+  //iterate through the bucket to see if there are any conflicting key value pairs in the bucket
+  //if there are, override them
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      //override value stored at this key
+      tuple[1] = value;
+      override = true;
+    }
+  }
+
+  if (!override) {
+    //create a new tuple in the bucket
+    //note that this could either be the new empty bucket or a bucket with other tuples with keys that are different than the key of the tuple we are inserting
+    //These tuples are in the bucket because their keys all equate to the same index when passing through the hasing function
+    bucket.push([key, value]);
+    this.count++
+    //now that the new key value pair is added to storage, check to see if we need to resize the storage
+    if (this.count > this.limit * 0.75){
+      this.resize(this.limit*2);
+    }
+  }
+  return this;
+};
+
+HashTable.prototype.remove = function(key) {
+  var index = this.hashFunction(key, this.limit);
+  var bucket= this.storage[index];
+  if (!bucket){
+    return null;
+  }
+  //iterate over the bucket
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    //check to see if key is inside bucket
+    if (tuple[0] === key) {
+      //if it is, get rid of this tuple
+      bucket.splice(i, 1);
+      this.count --;
+      if (this.count < this.limit * 0.25) {
+        this.resize(this.limit / 2);
+      }
+      return tuple[1];
+    }
+  }
+};
+
+HashTable.prototype.retrieve = function(key) {
+  var index = this.hashFunction(key, this.limit);
+  var bucket = this.storage[index];
+
+  if (!bucket) {
+    return null;
+  }
+  
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      return ("Item: " + tuple[0] + " Quantity: " + tuple[1])
+    }
+  }
+  return null;
+};
+
+HashTable.prototype.hashFunction = function(str, max) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    var letter = str[i];
+    hash = (hash << 5) + letter.charCodeAt(0);
+    hash = (hash & hash) % max;
+  }
+  return hash;
+}
+
+HashTable.prototype.resize = function(newLimit) {
+  var oldStorage = this.storage;
+
+  this.limit = newLimit;
+  this.count = 0;
+  this.storage = [];
+
+  oldStorage.forEach(function(bucket){
+    if (!bucket) {
+      return;
+    }
+    for (var i = 0; i < bucket.length; i++) {
+      var tuple = bucket[i];
+      this.insert(tuple[0], tuple[1]);
+    }
+  }.bind(this));
+};
+
+HashTable.prototype.retrieveAll = function(){
+  console.log(this.storage);
+  //console.log(this.limit);
+};
+
+/*************************************TESTS*******************************/
+
+var myHashTable = new HashTable();
+
+myHashTable.insert('Oreos', 5)
+myHashTable.insert('Saltine Crackers', 20).insert('Hairbrushes', 2).insert('Toy Trucks', 17).insert('Watermelons', 25)
+
+myHashTable.retrieve('Toy Trucks');//returns 'Item: Toy Trucks Quantity: 17'
+
+myHashTable.retrieveAll();
+
+```
+
+>Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+
+```
+
+var HashTable = function(limit = 8){
+  this.limit = limit;
+  this.storage = [];
+  this.count = 0;
+}
+
+//this.storage = [/*container*/[/*bucket/], [/*tuple/], []]]
+
+//Hashing function example implementation
+
+HashTable.prototype.insert = function(key, value) {
+  //create an index for our storage location by passing it through the hashing function
+  var index = this.hashFunction(key, this.limit);
+  //retrieve the bucket at this particular index in our storage
+  //[[ [k, v], [k, v], ], [ [k, v], [k, v] ] [ [k, v] ] ]
+  var bucket = this.storage[index]
+  //does a bucket exist or do we get undefined?
+  if(!bucket) {
+    //create the bucket
+    var bucket = [];
+    //insert the bucket into our hashTable
+    this.storage[index] = bucket;
+  }
+
+  var override = false; 
+  //iterate through the bucket to see if there are any conflicting key value pairs in the bucket
+  //if there are, override them
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      //override value stored at this key
+      tuple[1] = value;
+      override = true;
+    }
+  }
+
+  if (!override) {
+    //create a new tuple in the bucket
+    //note that this could either be the new empty bucket or a bucket with other tuples with keys that are different than the key of the tuple we are inserting
+    //These tuples are in the bucket because their keys all equate to the same index when passing through the hasing function
+    bucket.push([key, value]);
+    this.count++
+    //now that the new key value pair is added to storage, check to see if we need to resize the storage
+    if (this.count > this.limit * 0.75){
+      this.resize(this.limit*2);
+    }
+  }
+  return this;
+};
+
+HashTable.prototype.remove = function(key) {
+  var index = this.hashFunction(key, this.limit);
+  var bucket= this.storage[index];
+  if (!bucket){
+    return null;
+  }
+  //iterate over the bucket
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    //check to see if key is inside bucket
+    if (tuple[0] === key) {
+      //if it is, get rid of this tuple
+      bucket.splice(i, 1);
+      this.count --;
+      if (this.count < this.limit * 0.25) {
+        this.resize(this.limit / 2);
+      }
+      return tuple[1];
+    }
+  }
+};
+
+HashTable.prototype.retrieve = function(key) {
+  var index = this.hashFunction(key, this.limit);
+  var bucket = this.storage[index];
+
+  if (!bucket) {
+    return null;
+  }
+  
+  for (var i = 0; i < bucket.length; i++) {
+    var tuple = bucket[i];
+    if (tuple[0] === key) {
+      return ("Publishing Information: " + tuple[0] + " Newspaper: " + tuple[1])
+    }
+  }
+  return null;
+};
+
+HashTable.prototype.hashFunction = function(str, max) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    var letter = str[i];
+    hash = (hash << 5) + letter.charCodeAt(0);
+    hash = (hash & hash) % max;
+  }
+  return hash;
+}
+
+HashTable.prototype.resize = function(newLimit) {
+  var oldStorage = this.storage;
+
+  this.limit = newLimit;
+  this.count = 0;
+  this.storage = [];
+
+  oldStorage.forEach(function(bucket){
+    if (!bucket) {
+      return;
+    }
+    for (var i = 0; i < bucket.length; i++) {
+      var tuple = bucket[i];
+      this.insert(tuple[0], tuple[1]);
+    }
+  }.bind(this));
+};
+
+HashTable.prototype.retrieveAll = function(){
+  console.log(this.storage);
+  //console.log(this.limit);
+};
+
+/*************************************TESTS*******************************/
+
+var myHashTable = new HashTable();
+
+myHashTable.insert('Quality Publishes', 'The New York Times')
+myHashTable.insert('Just Okay Publishers', 'The Washington Post').insert('Glass Ceiling Publications', 'Criminology Today').insert('Our Publishing House is On Fire', 'The Orlando Sun Times' ).insert('Totally Reasonable Publishers', 'The Seattle Tribune')
+
+myHashTable.insert('February 2019', 'The New York Times')
+myHashTable.insert('March 2019', 'The Washington Post').insert('April 2019', 'Criminology Today').insert('May 2019', 'The Orlando Sun Times' ).insert('June 2019', 'The Seattle Tribune')
+
+myHashTable.retrieve('Totally Reasonable Publishers');//returns 'The Seattle Tribune'
+myHashTable.retrieve('April 2019');//returns 'Criminology Today'
+
+myHashTable.retrieveAll();
+
+```

@@ -1,0 +1,118 @@
+###Exercises
+
+>A line of people at an amusement park ride.
+
+>The line is composed of members, represented as strings.
+There is a front to the line, as well as a back.
+When someone enters the line, place them at the end.
+People may leave the line whenever they see fit, and those behind them take their place.
+Given the above real-world information, use an array data structure to code the following solution.
+
+>a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+```
+
+let parkLine = ['Vivian', 'Ava', 'Josh', 'Patrick', 'Mike']
+
+```
+
+>b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary after Mike.
+
+```
+let parkLine = ['Vivian', 'Ava', 'Josh', 'Patrick', 'Mike']
+
+parkLine.push('Mary')
+
+```
+
+c) Find a person in line named "Josh." This function should return the position of 2 in the array, 
+(recall that arrays are 0-based).
+
+```
+let parkLine = ['Vivian', 'Ava', 'Josh', 'Patrick', 'Mike']
+
+function findGuest(guest) {
+  for (i=0; i<parkLine.length; i++){
+    if (parkLine[i] === guest ){
+      return i;
+    }
+  }
+}
+
+findGuest('Josh');
+
+```
+
+>d) Find a person in line named "Emily." What should your function return if it does not find the item in the array?
+
+```
+let parkLine = ['Vivian', 'Ava', 'Josh', 'Patrick', 'Mike']
+
+function findGuest(guest) {
+  for (i=0; i<parkLine.length; i++){
+    if (parkLine[i] === guest ){
+      return i;
+    }
+  }
+  return "Guest not found.";
+}
+
+findGuest('Emily');
+
+```
+
+>e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? 
+How would you code this so Melissa appears before Ava?
+
+```
+
+let parkLine = ['Vivian', 'Ava', 'Josh', 'Patrick', 'Mike']
+
+function insertGuest(newGuest, presentGuest){
+  parkLine.splice(parkLine.indexOf(presentGuest), 0, newGuest)
+  return parkLine;
+}
+
+
+insertGuest('Melissa', 'Ava');
+
+```
+
+f) If Patrick wants to leave the line, how would you delete him from the array?
+
+```
+
+let parkLine = ['Vivian', 'Ava', 'Josh', 'Patrick', 'Mike']
+
+
+function deleteGuest(guest){
+  const deleteGuestIndex = (parkLine.indexOf(guest))
+  if (deleteGuestIndex >= 0){
+    parkLine.splice(deleteGuestIndex, 1)
+  }
+  return parkLine;
+}
+
+deleteGuest('Patrick');
+
+```
+
+>Provide another real-world example that you can model using a data structure.
+
+I work as a middle school teacher, and at the end of every quarter, we have an event called Mix It Up. 
+It's an event in which all of the students in the school are mixed up by grade level and compete in 
+different activities. Their schedules for the day are based on their preferences for activities, stuff like
+Video Games, Play Nail Salon, and Magic the Gathering. The teachers write out these schedules by hand from a 
+giant Excel sheet that is constructed by the school councelors. 
+
+I think that this entire process could be optimized by a utilizing a data structure and some functions to sort and return student data. 
+The first thing that came to mind when I was first learning about programming was the dictionary object available in Python, 
+an unordered collection of key:value pairs. Javascript has a similar object that I think would work for the same purpose.
+
+>How would your data structure allow developers to access and manipulate the data?
+
+I picture one large dictionary that holds each homeroom teacher as a key with a value of smaller dictionaries that hold their homeroom students.
+Those dictionaries would hold keys corresponding to student names and values that correspond to their schedules for Mix It Up (or any other
+schedule-dependent school event). I think that reading fromand writing to a CSV file would probably be the best way to go about this. 
+Teachers could easily print out a spreadsheet of data for their homeroom students. Dictionary data is mutable, so these items could be changed
+if the schedule needs to be adjusted.

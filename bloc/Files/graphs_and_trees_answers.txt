@@ -1,0 +1,117 @@
+###Exercises
+
+>What is a binary tree and what makes it unique to other trees?
+
+A Binary Tree is a data structure in which each Node may point to a left child and a right child. A Binary Search Tree orders
+eacah Node in the Tree based on some quantifiable value. Nodes increase in value toward the right and decrease in value toward
+the left.
+
+Other tree structures simulate a hierarchal tree structure consisting of nodes, like Linked Lists. Tree data structures have their 
+Root Node at the top and grow downwards. In a Binary Tree, Nodes can have up to two child nodes (or no nodes at all, called Leaf Nodes).
+
+>What is a heuristic?
+
+A heuristic is a "best guess" that an algorithm makes to solve a complex problem by sacrificing some accuracy. Using heuristics can save
+a lot of time when approaching familiar or similar problems, but shouldn't be relied on for problems that require exceptional intricacy.
+
+>What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+We use heuristics in Magic the Gathering for a lot of things. The most common is opening-hand evaluation. In a 40 or 60 card deck, a computer
+could be asked to decide whether a 7-card opening hand is playable, or if we should try again and draw 6 new cards. It is absolutely possible to 
+do the math on the probability to draw a land versus a spell on the player's next draw, but it's a lot faster to just use the heuristic that a 3-land
+opening hand is fine, and you're about 40% likely to draw a spell by turn two. Similarly, a one-land hand with 6 cards and a scry (looking at the top
+card of the deck and the option to put that top card on the bottom) is generally better than a one-land hand with 7 cards and no scry.
+
+>What is the difference between a depth-first search and a breadth-first search?
+
+In a depth-first search, the program will search downward consistently using one direction (left or right) from the root through nodes until it reaches a dead end, 
+at which point it would return to the root and search downward again, using one different choice (left or right) to go down a different node path.
+
+For a breadth-first search, a program searches row-by-row from the root downward through the child nodes until the searched element is found.
+
+>Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+An undirected graph allows for two-way travel, implying that, rather than searching from one node to the next to the next, a program could go back in its search
+if necessary. An a-cyclic graph does not form a loop - like a Linked List or a Tree, none of the Nodes will point back at one of its parent Nodes. An unweighted
+graph does not associate a cost with travel between Nodes.
+
+>What kind of graph is a binary search tree?
+
+A Binary Search Tree is a Directed, A-Cyclic, Unweighted graph.
+
+###Programming Questions
+
+>For the following questions, describe in words how you could solve the problem and then do so. 
+Use the depiction of the Binary Search Tree to refer to the examples.
+
+>Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+Assuming the other functions are already in place for the Binary Tree class, this function should find a value within the tree
+and return a boolean. I want the function to take an argument of searchValue and go from Node to Node checking to see if the 
+searchValue variable matches the value at that Node. If it does, the function should return "true." Otherwise, after checking each
+Node in the tree and finding no matching value, it should return "false".
+
+
+```
+
+BinaryTree.prototype.find = function(searchValue){
+  tempNode = this.head;
+  while (tempNode){
+    if (tempNode.value == searchValue){
+      return true;
+    } else {
+    tempNode = tempNode.next;
+    }
+  }
+  return false;
+}
+
+myTree = new BinaryTree()
+myTree.push("apple")
+myTree.push("pear")
+myTree.push("strawberry")
+myTree.push("pineapple")
+myTree.push("avocado")
+myTree.find("pickle")
+
+```
+
+>Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+This function will use another function, findPosition, which finds the number of moves necessary to get from n1 to n2. 
+By finding the position of n1 and then subtracting the position of n2, then applying the Math.abs() method, we can find the
+number of nodes between n1 and n2.
+
+```
+
+LinkedList.prototype.findPosition = function(value){
+  tempNode = this.head;
+  position = 0;
+  while (tempNode) {
+    if (tempNode.value == value){
+      return position;
+    } else {
+      tempNode = tempNode.next;
+      position += 1;
+    }
+  }
+  return ("Value not found");
+}
+
+LinkedList.prototype.distance = function(n1, n2){
+  console.log(n1, n2)
+  return Math.abs(this.findPosition(n1) - this.findPosition(n2));
+}
+
+
+
+myList = new LinkedList()
+myList.push("apple")
+myList.push("pear")
+myList.push("strawberry")
+myList.push("pineapple")
+myList.push("avocado")
+myList.findPosition("pineapple");
+myList.distance("apple", "avocado")
+
+```

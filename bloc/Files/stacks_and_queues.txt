@@ -1,0 +1,196 @@
+###Exercises
+
+>What is the main difference between a stack and a queue?
+
+The queue data structure arranges elements in a first in first out order (FIFO) and 
+uses "enqueue" and "dequeue" to add and remove elements respectively. 
+
+A stack data structure arranges elements in a last in first out order (LIFO) and 
+uses "push" to add elements to the end of the stack and "pop" to remove them.
+
+>What are the similarities between stacks and queues?
+
+Both are types of data structures that allow programmers to rank tasks, create an order of operations, 
+and support system functions.
+
+>Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor 
+such as Microsoft Word. Which data structure would you use for each option and why?
+
+#UNDO
+
+For an undo function, I think that a LIFO data structure, a stack, would be most viable. A user would want access 
+to the last thing that they'd put onto the stack in order to undo that action or remove that piece of data. I'm 
+assuming that this function would only access the very last thing put on the stack and undo that top item, and possibly 
+the items below it in the order that they were put on.
+
+#REDO
+
+Redo is the opposite of Undo, so my instinct is to say that a FIFO data structure would work best for a redo function, 
+since I think that a LIFO or stack structure would be best for an undo function. But, it doesn't sound quite right when
+I think about it, so let me walk through why I think that using a LIFO structure for a redo function would also be correct.
+If a user is redo-ing something that was just undone, the Undo function would  passing data to a separate data structure,
+but the elements that we want to access would still be organized from the least recent thing undone to the most recent thing undone.
+That is why I think that a stack data structure, or LIFO, would make the most sense for a redo function.
+
+###Programming Questions
+
+
+>You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how 
+you will solve the question.
+
+>Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+Pseudocode:
+
+//FUNCTION REVERSE(original)
+  //INIT a new stack
+  //FOR each character in original
+    //CALL stack.push WITH character
+  //END FOR
+  //INIT reversed to empty string
+  //WHILE stack is not empty
+    //CALL stack.pop RETURNING character
+    //APPEND character to reversed
+  //END WHILE
+  //RETURN reversed
+//END FUNCTION
+
+
+```
+function reverseString(originalString){
+  var stack =[];
+  for (i=0; i<originalString.length; i++){
+    stack.push(originalString[i])
+  }
+  var reversed = "";
+  while (stack.length != 0){
+    reversed += stack.pop();
+  }
+  return reversed;
+}
+```
+
+>Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data 
+structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+Pseudocode:
+
+//CREATE CONSTRUCTOR Queue
+  //INIT storage
+  //INIT count
+
+//FUNCTION queue(element)
+  //APPEND element to list (at the end)
+  //Increment count
+//END FUNCTION
+
+//FUNCTION pop()
+  //Decrement count
+  //INIT deletedItem to last element in list
+  //DELETE last element of list from list
+  //RETURN deletedItem
+//END FUNCTION
+
+//FUNCTION size()
+  //RETURN count
+//END FUNCTION
+
+```
+
+const Queue = function(){
+  this.storage = {};
+  this.count = 0;
+}
+
+Queue.prototype.enqueue = function(value){
+    if(value){
+        this.storage[this.count] = value
+        this.count++
+    }
+}
+
+Queue.prototype.pop = function (){
+  if (this.count === 0){
+    return undefined;
+  }
+  this.count--;
+  let result = this.storage[this.count];
+  delete this.storage[this.count];
+  return result;
+}
+
+Queue.prototype.size = function() {
+  return this.count;
+}
+
+let myQueue = new Queue()
+myQueue.enqueue("0")
+myQueue.enqueue("1")
+myQueue.enqueue("2")
+myQueue.enqueue("3")
+myQueue.enqueue("4")
+myQueue.pop()
+
+console.log(myQueue)
+
+```
+
+>Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+//CREATE CONSTRUCTOR Queue
+  //INIT storage
+  //INIT count
+  //INIT minCount
+
+//FUNCTION queue(element)
+  //APPEND element to list (at the end)
+  //Increment count
+//END FUNCTION
+
+//FUNCTION dequeue()
+  //Increment minCount
+  //INIT deletedItem to first item in list
+  //DELETE deletedItem
+  //RETURN deletedItem
+//END FUNCTION
+
+//FUNCTION size()
+  //RETURN count minus minCount
+//END FUNCTION
+
+const Queue = function(){
+  this.storage = {};
+  this.count = 0;
+  this.deleteCount = 0;
+}
+
+Queue.prototype.enqueue = function(value){
+    if(value){
+        this.storage[this.count] = value
+        this.count++
+    }
+}
+
+Queue.prototype.dequeue = function (){
+  if (this.count-this.deleteCount === 0){
+    return undefined;
+  }
+  let result = this.storage[this.minCount];
+  delete this.storage[this.deleteCount];
+  this.deleteCount++;
+  return result;
+}
+
+Queue.prototype.size = function() {
+  return this.count-this.deleteCount;
+}
+
+let myQueue = new Queue()
+for (i=0; i<=100;i++) {
+  myQueue.enqueue(i);
+}
+
+for (i=0; i<=5;i++) {
+  myQueue.dequeue();
+}
+console.log(myQueue);

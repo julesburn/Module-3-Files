@@ -1,0 +1,72 @@
+Short Answer
+Why do programmers use pseudocode?
+
+To help them organize and visualize the problem they're trying to solve and break it down into smaller, ordered steps.
+
+If you run pseudocode on your computer what would happen?
+Nothing, it's not code. Depending what was entered, it might throw an error.
+
+Programming Assignment
+Write the following algorithms in pseudocode:
+
+Create a function that takes two numbers and prints out the greater number.
+INPUT first number
+INPUT second number
+IF first number is greater:
+PRINT first number
+ELSE
+PRINT second number
+
+Create a function that prints out the numbers from 1 to 100.
+WHILE the number is less than 101:
+START at 0
+PRINT the number
+ADD 1 to the number
+END the loop
+
+Create a function that searches for a specific entry in a phonebook.
+
+INPUT the search query
+FOR the entries in the phonebook:
+IF the search query matches an entry:
+RETURN the entry
+
+
+Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+
+############################################################################
+#	Phonebook Search
+#	Christine Benson
+#	February 18, 2019
+#	Version 1.0
+#	Python 3.0
+############################################################################
+
+#This prgram takes input from the user in the form of a name
+#searches a list containing the entries in a file called phonebook.txt
+#and returns the corresponding phonebook entry
+
+
+def main():
+
+  #Get the name of the person the user is searching for
+  search_query = str(input("Enter the name you'd like to search for: ")
+  
+  #Open the file phonebook.txt for reading
+  phonebook_file = open("phonebook.txt", 'r')
+
+  #Search the file for the name input by the user
+  for line in phonebook_file:
+    if search_query in line:
+      return line
+    else:
+     print("The name you have entered was not found. Please check the spelling and try again.")
+
+  #Close the file
+  phonebook_file.close()
+
+  #Execute the main function again
+  main()
+
+#Execute the main function
+main()
