@@ -80,8 +80,8 @@ HashTable.prototype.insert = function(key, value) {
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i];
     if (tuple[0] === key) {
-      //override value stored at this key
-      tuple[1] = value;
+      //add the value stored at this key
+      tuple.push(value);
       override = true;
     }
   }
@@ -89,7 +89,7 @@ HashTable.prototype.insert = function(key, value) {
   if (!override) {
     //create a new tuple in the bucket
     //note that this could either be the new empty bucket or a bucket with other tuples with keys that are different than the key of the tuple we are inserting
-    //These tuples are in the bucket because their keys all equate to the same index when passing through the hasing function
+    //These tuples are in the bucket because their keys all equate to the same index when passing through the hashing function
     bucket.push([key, value]);
     this.count++
     //now that the new key value pair is added to storage, check to see if we need to resize the storage
@@ -129,11 +129,13 @@ HashTable.prototype.retrieve = function(key) {
   if (!bucket) {
     return null;
   }
-  
+
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i];
     if (tuple[0] === key) {
-      return ("Name: " + tuple[1][0] + " Address: " + tuple[1][1]);
+      for (i=1; i < tuple.length; i++){
+        console.log("Name: "+ tuple[i].name + " Address: " + tuple[i].address + " Phone Number: " + tuple[i].phoneNumber);
+      }
     }
   }
   return null;
@@ -176,16 +178,18 @@ HashTable.prototype.retrieveAll = function(){
 
 var myHashTable = new HashTable();
 
-myHashTable.insert('555-123-1234', ['Ally Sheedy', '12 Grimmauld Place, London UK']);
+myHashTable.insert('555-123-1234', {name: 'Ally Sheedy', address: '12 Grimmauld Place, London UK', phoneNumber: '555-123-1234'});
 
-myHashTable.insert('555-123-2345', ['Judd Nelson', '10 Downing Street, London UK']);
+myHashTable.insert('555-123-2345', {name: 'Judd Nelson', address: '10 Downing Street, London UK', phoneNumber: '555-123-2345'});
 
-myHashTable.insert('555-123-3456', ['Molly Ringwald', '800 Pennsylvania Avenue, Washington D.C. USA']);
+myHashTable.insert('555-123-3456', {name: 'Matthew Broderick', address: '800 Pennsylvania Avenue, Apt A, Washington D.C. USA', phoneNumber: '555-123-3456'});
 
-myHashTable.insert('555-123-4567', ['Anthony Michael Hall', '4 Privet Drive, Little Whinging, UK']).insert('555-123-5678', ['Emilio Estevez', 'The Land Down Under, Gold Coast, AUS']);
+myHashTable.insert('555-123-3456', {name: 'Molly Ringwald', address: '800 Pennsylvania Avenue, Washington D.C. USA', phoneNumber: '555-123-3456'});
 
-myHashTable.retrieve('555-123-1234');//returns 'Ally Sheedy'
-myHashTable.retrieve('555-123-3456');//returns 'Molly Ringwald'
+myHashTable.insert('555-123-4567', {name: 'Anthony Michael Hall', address: '4 Privet Drive, Little Whinging, UK', phoneNumber: '555-123-4567'}).insert('555-123-5678', {name: 'Emilio Estevez', address: 'The Land Down Under, Gold Coast, AUS', phoneNumber: '555-123-3456'});
+
+myHashTable.retrieve('555-123-3456');
+
 
 ```
 
@@ -276,7 +280,7 @@ HashTable.prototype.retrieve = function(key) {
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i];
     if (tuple[0] === key) {
-      return ("Item: " + tuple[0] + " Quantity: " + tuple[1])
+      return ("Item: " + tuple[i].item + " Quantity: " + tuple[i].quantity)
     }
   }
   return null;
@@ -311,16 +315,15 @@ HashTable.prototype.resize = function(newLimit) {
 };
 
 HashTable.prototype.retrieveAll = function(){
-  console.log(this.storage);
-  //console.log(this.limit);
+  return (this.storage);
 };
 
 /*************************************TESTS*******************************/
 
 var myHashTable = new HashTable();
 
-myHashTable.insert('Oreos', 5)
-myHashTable.insert('Saltine Crackers', 20).insert('Hairbrushes', 2).insert('Toy Trucks', 17).insert('Watermelons', 25)
+myHashTable.insert({item: 'Oreos', quantity: 5})
+myHashTable.insert({item:'Saltine Crackers', quantity: 20}).insert({item: 'Hairbrushes', quantity: 2}).insert({item 'Toy Trucks', quantity: 17}).insert({item: 'Watermelons', quantity: 25})
 
 myHashTable.retrieve('Toy Trucks');//returns 'Item: Toy Trucks Quantity: 17'
 
@@ -415,7 +418,7 @@ HashTable.prototype.retrieve = function(key) {
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i];
     if (tuple[0] === key) {
-      return ("Publishing Information: " + tuple[0] + " Newspaper: " + tuple[1])
+      return ("Publisher: " + tuple[i].publisher + " Publication Date: " + tuple[i].publicationDate + " Newspaper: " + tuple[i].newspaper)
     }
   }
   return null;
@@ -458,14 +461,15 @@ HashTable.prototype.retrieveAll = function(){
 
 var myHashTable = new HashTable();
 
-myHashTable.insert('Quality Publishes', 'The New York Times')
-myHashTable.insert('Just Okay Publishers', 'The Washington Post').insert('Glass Ceiling Publications', 'Criminology Today').insert('Our Publishing House is On Fire', 'The Orlando Sun Times' ).insert('Totally Reasonable Publishers', 'The Seattle Tribune')
+myHashTable.insert({publisher: 'Quality Publishes', publicationDate: 'February 2019', newspaper: 'The New York Times'})
+myHashTable.insert({publisher: 'Just Okay Publishers', publicationDate: 'April 2019' newspaper: 'The Washington Post'})
 
-myHashTable.insert('February 2019', 'The New York Times')
-myHashTable.insert('March 2019', 'The Washington Post').insert('April 2019', 'Criminology Today').insert('May 2019', 'The Orlando Sun Times' ).insert('June 2019', 'The Seattle Tribune')
+myHashTable.insert({publisher: 'Glass Ceiling Publications', publicationDate: 'April 2019', newspaper: 'Criminology Today'})
+myHashTable.insert({publisher: 'Our Publishing House is On Fire', publicationDate: 'May 2019', newspaper: 'The Orlando Sun Times'})
+myHashTable.insert({publisher: 'Totally Reasonable Publishers', publicationDate: 'June 2019, newspaper: 'The Seattle Tribune'})
 
-myHashTable.retrieve('Totally Reasonable Publishers');//returns 'The Seattle Tribune'
-myHashTable.retrieve('April 2019');//returns 'Criminology Today'
+myHashTable.retrieve('Totally Reasonable Publishers');
+myHashTable.retrieve('April 2019');
 
 myHashTable.retrieveAll();
 
