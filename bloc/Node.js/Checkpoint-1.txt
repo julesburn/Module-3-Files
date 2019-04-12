@@ -1,0 +1,42 @@
+###Exercises
+
+
+>In your own words highlight the differences in functionality
+and purposes Client-Side and Server-Side code serves in a 
+full-stack web application.
+
+Client-side code runs on the client's computer in a browser. It sends requests to 
+the server, and then uses the data that it receives back to render content
+for the client. The client-side code processes, manipulates, and renders
+this data that is sent from the server to provide a complete user experience, 
+including window and document objects.
+
+Server-side code runs on the server in a process. When a request is sent from the client,
+server-side code handles the request and sends data back as a response. It is
+common for server-side code to interact with a database. Server-side code has no
+window or document objects and does not interface with HTML or the DOM.
+
+>What explains Nodes' rise in popularity and use? What does 
+"Isomorphic JavaScript programming" mean? Provide some 
+real-world examples not listed in this checkpoint of companies 
+using Node.js.
+
+An Isomorphic Javascript application can run on both the client-side and the 
+server-side. Some of the application and view logic can be executed on both
+the server and the client, which helps to optimize performance, allows for 
+increased maintainability, more stateful web apps, and search engine optimization
+by default. Node.js facilitates this with a fast, stable server-side script runtime.
+Node.js allows developers to write application logic such that it runs on both the
+server and the client, thus allowing for faster, more efficient, stable, and searchable
+web apps.
+
+Some examples of Node.js in today's consumer Internet include Microsoft, IBM, Cisco, Netflix,
+PayPal. PayPal has over 200 million active user accounts. They faced the problem of dispersed
+teams doing tasks separately for browser and server applications. Now, their developers use
+a single language - JavaScript.
+
+Ebay also uses Node.js. The developers chose Node.js because they needed to make the Ebay application
+as real-time as possible. The Ebay example shows the ability to maintain live connections to servers.
+
+>Draw a diagram of a full-stack web application and its key components.
+

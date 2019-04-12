@@ -1,0 +1,100 @@
+###EXercises
+
+>What is time complexity and what is its relation to algorithms?
+
+Time complexity refers to the function that estimates the time it takes for a program to execute.
+In relation to algorithms, the function would estimate the runtime of an algorithm for the user.
+
+>What is runtime?
+
+Runtime is the physical time duration it takes for an algorithm to run (synonomous with time complexity).
+
+>How is the runtime of an algorithm calculated?
+
+Runtime is calculated by adding the instructions the algorithm will execute as a function of the size of the function's
+input, which is then simplified to the largest term and constants are dropped. Runtime is affected by different operations
+within the function, such as comparisons, loops, and function calls. 
+
+>Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. 
+Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+
+* Constant Growth Rate (0(1))
+
+* Logarithmic Growth Rate (0(log n))
+
+* Linear Growth (0(n))
+
+* Log-Linear Growth Rate (0(n log n))
+
+*Quadratic Growth Rate (0(n^2))
+
+* **Cubic Growth Rate (0(n^3))**
+
+*Exponential Growth Rate (0(2^n))
+
+>Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+
+There exists a field of beautiful, waving lavender. Perhaps you don't this, but bunnies love to eat lavender. So, in this
+legendary lavender field, a pair of bunnies finds the lavender and creates a home. Well-fed and happy, the pair of bunnies 
+makes six more bunnies. Those pairs of bunnies, also well-fed with lavender, each beget six more bunnies. The fields of lavender,
+not quite infinite, support the **Exponential Growth Rate** of the bunnies for many years to come, but eventually the growth rate of 
+the bunnies outstrips that of the lavender, and they must move on or starve.
+
+>Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+```
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array
+   IF number = target THEN
+     RETURN true
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+
+```
+
+Linear Growth Rate (0(n))
+
+>Determine the time complexity of the following snippet of code.
+
+```
+
+FUNCTION foo(array)
+ FOR each number in the array
+   FOR each number in the array
+     print "Hello"
+   END FOR
+ END FOR
+END FUNCTION
+
+```
+
+Quadratic Growth Rate (0(n^2))
+
+>Determine the time complexity of the following snippet of code. 
+It is commonly known as the Fibonacci sequence.
+
+```
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+```
+
+Exponential Growth Rate (0(2^n))
+
+>Out of the code snippets you just saw, which is the most time efficient?
+
+The Linear Growth Rate function is the most time efficient assuming infinite inputs. As the number of inputs grows,
+both the Quadratic Growth Rate function and the Exponential Growth Rate function will take relatively longer to process.

@@ -1,0 +1,136 @@
+###Exercises
+
+>Using proper pseudo-code, describe the following primitive algorithms:
+
+#Making Coffee
+
+```
+Making coffee;
+Washing dishes;
+A choice of your own.
+
+GATHER supplies: Chemex carafe, filter, electric kettle, ground coffee, cup, cream (optional), sugar (optional)
+
+FILL electric kettle with 1 liter of water
+START electric kettle
+
+FOLD filter to fit in top of Chemex carafe
+PUT filter into top of Chemex carafe
+PUT 4 oz ground coffee into filter at top of Chemex carafe
+
+WHILE electric kettle is still heating water,
+  WAIT for water to boil
+END WHILE
+
+
+FOR water in electric kettle
+  POUR boiling water over coffee in at top of Chemex carafe until water reaches rim
+  LET water drain through filter
+END FOR
+
+REMOVE filter and ground coffee from top of Chemex carafe
+THROW filter away
+
+POUR 8oz of coffee into cup from Chemex carafe
+IF you like cream and/or sugar
+  ADD cream and/or sugar
+END IF
+
+CONSUME coffee
+
+```
+
+#Washing Dishes
+
+```
+
+COLLECT SUPPLIES: Dirty Dishes, Double-Basin Sink, Sink Plug, Brush, Dish Soap, Dish Drying Rack
+
+TURN ON water in Sink
+
+WHILE water is NOT warm
+  RUN water into right basin of Sink
+END WHILE
+
+INSERT Sink Plug into Sink drain
+WHILE Sink is NOT FULL
+  RUN water into right basin of Sink
+END WHILE
+
+TURN OFF water in Sink
+
+PUT teaspoon of Dish Soap on Brush
+LATHER Dish Soap on Brush
+
+WHILE Dish Drying Rack is NOT FULL
+  FOR dish in Dirty Dishes
+    SCRUB dish with Brush 
+    RINSE dish in right basin
+    TURN ON water in left basin
+    RINSE dish under water
+    TURN OFF water in left basin
+    PLACE dish on Dish Drying Rack
+    IF Brush is NOT lathered
+      PUT teaspoon of Dish Soap on Brush
+    END IF
+  END FOR
+  IF Dirty Dishes is NOT null
+    FOR dish in Dirty Dishes
+    STACK dish to left of Sink
+    END FOR
+  END IF
+END WHILE
+
+```
+
+#Find a Show to Watch on Netflix
+
+```
+
+COLLECT SUPPLIES: Playstation Controller, Playstation, TV, TV Remote, Snack, Blanket, Couch
+
+SIT on Couch
+COVER lower body with Blanket
+
+TURN ON TV with TV Remote
+TURN ON Playstation with Playstation Controller
+SELECT Video Option with Playstation Controller
+SELECT Netflix Option with Playstation Controller
+
+FOR movie on My List
+  IF movie has NOT been watched AND looks not too sad OR looks not too scary AND I have NOT promised to watch movie with someone else
+    START movie
+  ELSE listen to favorite podcast
+  END IF
+END FOR
+EAT Snack
+
+```
+
+>As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick 
+the best algorithm for a situation. Name three companies who created an algorithm that made them successful, 
+e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). 
+Google's algorithm produces more relevant results than other search engines; what about each of your cases make 
+them stand out?
+
+* Ford's Model T is an interesting early example of an algorithm. Ford was the first company to use an assembly line to
+streamline the production of their product, which allowed the company to make more cars faster than anyone else and take over
+the American auto industry for a time. There are many ways to build a car, but Ford's was the most efficient.
+  
+* Netflix was the first major streaming service, because they were able to optimize the compression of data so that users
+could stream video directly over the Internet instead of having to download an entire file first. In the last two years, Netflix
+has introduced the use of AI into their streaming codec to compete with other streaming services like Hulu and Amazon Prime.
+The AI analyzes each frame of a video and tweaks the compression in order to optimize buffering speed, even on slow Internet.
+Very cool.
+
+* I use a meal-prep delivery box service called Dinnerly, which is similar to other meal box services like Plated, Blue Apron,
+and Home Chef, but nearly $100 per month cheaper. Dinnerly offers the same quality food as its competitors, but cut out the fancy
+recipe cards (theirs are online) and excessive packaging (many items are packaged together rather than in separate containers). Although
+they don't advertise it, I suspect that they source their meat from "less ethical" sources than the competing companies claim as well, but
+for a consumer on a budget, Dinnerly's optimized price tag of $38 per week for six meals set them enough apart for me to subscribe.
+
+>Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+An efficient algorithm shouldn't contain repeating code, rather it should be broken down into unique steps that depend only upon the input or the result of a previous step. 
+I would assume an algorithm shouldn't contain any unnecessary logic - each step should have a clearly defined purpose. The algorithm's steps should be precise, each step 
+clearly stated, and finite. 

@@ -1,0 +1,101 @@
+###Short Answer
+>What is a real-life scenario that uses linear search?
+
+A real-life scenario using linear search might be looking for your lost puppy at the local
+animal shelter. They've got a long line of cages, and you have to find your puppy by going 
+down the line until you recognize him or her.
+
+In a twist of fate, all of the puppies are too cute to leave behind, so you decide to become
+a puppy ranch owner and adopt them all.
+
+>What is a real-life scenario that uses binary search?
+
+As the owner of a new puppy ranch, you have a lot of varied diet needs for your collection of pups.
+When it's time to feed the pack, you have to find each puppy's food and deliver it to them. All of 
+the food is sorted in your puppy ranch pantry alphabetically. The first puppy to be fed today will be
+little Henry. 
+
+When you go to find the food, the first bag on the shelf is for Abigail, the bag in the 
+middle is for Peter, and the bag at the very end is for Zoroaster. You know that Henry's food will be 
+between Abigail's and Peter's, so you can narrow the search to that section. The mid-section of between
+Abigail and Peter's food is food for Heathcliffe. You know that Henry's food will be between Heathcliffe
+and Peter's food, since Henry is alphabetically greater than Heathcliffe (but only alphabetically - they're
+all the same in your heart). You narrow your search further, the new midpoint is food for Jack. This narrowing
+continues until Henry's food is found!
+
+>Given the alphabetically sorted collection in this checkpoint, 
+how many iterations would it take to find the value G using linear search?
+
+Seven
+
+
+>Given the alphabetically sorted collection in this checkpoint, 
+how many iterations would it take to find the value G using binary search?
+
+Five
+
+
+>Given an unsorted collection of a million items, 
+which algorithm would you choose between linear search and binary search? 
+Explain your reasoning.
+
+An unsorted collection can't be searched using binary search, since this type of
+search depends on a collection being sorted in order to execute properly. One would 
+have to either sort the collection before executing a binary search or use a linear
+search.
+
+
+>Given a sorted collection of a million items, which algorithm would you choose 
+between linear search and binary search? Explain your reasoning.
+
+A sorted collection would be much more quickly searched using a binary search, since
+the first iteration would eliminate 500,000 of the items and continue to halve the field
+with each iteration of the search.
+
+
+###Programming Assignment:
+
+
+>You and a friend have set a wager to see who can find the word "Albatross" in the 
+dictionary the fastest. Write a program to allow you to win the bet.
+
+```
+function SearchDictionary(collection, value){
+  low = 0;
+  high = collection.length-1;
+  console.log(low, high)
+
+  while (low <= high){
+    mid = Math.round((low+high) / 2);
+    if (collection[mid] > value){
+      high = (mid-1)
+    } else if (collection[mid]< value){
+      low = (mid+1)
+    } else {
+      return mid;
+    }
+    }
+    return "not found";
+  }
+
+  SearchDictionary(["aardvark","albatross", "bear", "car", "derailed", "elephant"], "albatross");
+
+```
+
+
+>You work at a pet store, and a child has asked you to net the only white-spotted 
+goldfish from the fish tank. Write a program that will help you net the right fish.
+
+```
+
+function searchFishTank(fishSchool){
+  for (fishIndex=0; fishIndex < fishSchool.length; fishIndex++){
+    if (fishSchool[fishIndex] == "whiteFish"){
+      return "The white fish is the " + fishIndex + "th fish!";
+    }
+  } return "There is no white goldfish.";
+} 
+
+searchFishTank(["goldfish", "goldfish", "goldfish", "goldfish", "goldfish", "goldfish", "whiteFish", "goldfish", "goldfish", "goldfish", "goldfish"])
+
+```

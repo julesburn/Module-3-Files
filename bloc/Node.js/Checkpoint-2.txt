@@ -1,0 +1,14 @@
+###Exercises
+
+
+>What is npm and what does it do?
+
+`npm` is the Node.js Package Manager. It hosts thousands of free packages to download and use. This tool is accessed through the command line and is used to interact with a huge repository of Node.js projects.
+
+>What kind of information does package.json hold?
+
+The `package.json` is a file that communicates to `npm` how a Node application is structured.
+
+>Google another Node package. Using the demo directory run npm install <theNameOfThePackage> --save. Check the contents of your package.json file to make sure that the dependencies list the name of the Node package.
+
+I chose to install Moment.js because I find myself constantly frustrated with the way date objects are formatted in JS, and this package promises to make working with dates and times more user-friendly! It even has an add-on for parsing and formatting dates in different time zones.

@@ -1,0 +1,115 @@
+###Exercises
+
+>Define and compare recursion and iteration.
+
+Recursion - a process performed by repeating the same steps until it is complete. In programming, recursion
+describes a function that calls itself until the procedure is complete (base case).
+
+Iteration - A process in which a set of instructions or structures are repeated in a sequence a specified number
+of times or until a condition is met. 
+
+Both recursion and iteration repeatedly execute a set of instructions. However, recursion specifies that a statement
+within the function calls itself repeatedly, whereas iteration is defined by a loop repeatedly executing until the
+controlling condition is met. The primary difference between recursion and iteration is that recursion is a process
+that is applied to a function. Iteration, on the other hand, is applied to a set of instructions that are then executed.
+
+
+>Name five algorithms that are commonly implemented by recursion.
+
+* Merge Sort
+* Binary Search
+* Fibonacci Sequence
+* Greatest Common Divisor
+* Fractals
+
+>When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+The use of recursion often depends on the language being used to write the program. For example,
+when writing in C, C++, Basic, Python, Ruby, Java, and C#, iteration is generally preferable to recursion
+because of the way that functions are called in these languages. These languages call a function by "carving out"
+space on the stack for the function's arguments and local variables. When a program starts, it allocates a single chunk
+of memory for the stack and when it runs out of memory, often due to recursion, the program crashes (called a stack overflow).
+
+In these languages, recursion is slower and vulnerable to crashes. However, it is true that code written recursively is generally
+shorter and more elegant. I read a bit about a technique called tail call optimization that allows for a functions return expression to 
+simply be the result of a function call, which allows for reuse of the current level of the stack for the function being called. However, 
+this technique is not built in to many languages. 
+
+Recursion is an excellent tool for writing short, elegant code that needs to repeat a function call. However, there are languages that are
+not tuned to support recursion and will run more smoothly with iterative actions instead, especially as inputs become larger, since recursive
+solutions take up exponentially more memory as they execute.
+
+
+>Compare the recursive and iterative solutions to the three algorithms from the checkpoint 
+(factorial, maximum, and fibonacci). What is similar, and what is different?
+
+Iterative - The iterative solution's base case throws an error if the input is less than zero. If the input is
+zero or 1, the result will be 1, which is the base case of the recursive solution. The iterative solution starts 
+with an integer, i, and executes a number of times equal to that integer minus 2 (since the For loop ends at 2) 
+and emulates the factorial(number-1) process by decreasing the value of i by 1 down to 2 and multiplying it by i.
+For the iterative function, the result changes with each iteration of the loop. The recursive function generates
+the factorial(number-1) x number of times (where x is the number of times the input is reduced until it reaches a base
+case) and then returns the results.
+
+Maximum - The Maximum function executed using recursion returns an error when passed an empty set. If
+one item is passed in, it is automatically the largest, so the function automatically returns that number. Using recursion, 
+the first value from numbers is taken and then the function is recursively called with the remaining numbers. So, each number is
+pulled from the set and then compared recursively to the number held from the previous function call. The iterative version is much
+cleaner. The iterative function loops through all of the numbers and compares them to the integer identified as currentMaximum and 
+currentMaximum is reset if a larger number is found.
+
+Fibonacci - The base cases for the recursive sequence return an error if the number is less than 1, and returns 1 if the number is 1 or
+2. These cases are the same for the iterative function. The recursive Fibonacci function calls itself twice, once with two less than the 
+current number and again with one less than number. Those two are added together and the result is returned. The iterative function keeps
+track of the two numbers to add in variables when the input is greater than or equal to 3. The steps are similar to that of the recursive
+function, except the variable "current" holds the most updated calculated number on each iteration of the loop. 
+
+
+>Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, 
+write a recursive algorithm to count the number of items in the entire collection.
+
+```
+
+function CountItems(collection){
+  if (collection.length <= 0 ) {
+    return 0;
+  }else {
+    return 1 + CountItems(collection.slice([1, ]))
+  }
+}
+
+CountItems([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+```
+
+
+>A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). 
+Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+```
+
+function isPalindrome(str){
+  str = str.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, "");
+  if (_flipword(str) === str) {
+    return true;
+  }
+  function _flipword(str){
+    if (str === ""){ //base case
+    return "";
+    } else {
+      return _flipword(str.substr(1)) + str.charAt(0);
+      };
+    };
+    return false;
+  };
+
+```
+
+
+>Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". 
+Explain why this behavior exhibits properties of recursion.
+
+There's a computer science joke that states: "To understand recursion, you must first understand recursion."
+Google is referencing this joke. If you were to click on Google's suggestion, it would take you again to the
+same page, redirecting you infinitely to click on recursion (presumably until the base case of understanding
+recursion is met and you can move on).

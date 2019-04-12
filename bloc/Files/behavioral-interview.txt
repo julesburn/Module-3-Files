@@ -1,0 +1,96 @@
+> Tell me about yourself.
+
+I'm currently transitioning from my teaching career toward my path as a web developer.
+I've been studying web development at Bloc since December 2018 after a few coding
+classes at my local community college sparked my interest in the field. Before Bloc,
+and during my Bloc program, I worked as a Special Education Teacher. As much as I enjoy
+the field of education, I think that I can make a bigger difference in students' experience
+as a web developer at your company.
+
+>Why are you interested in programming?
+
+I took a course in Python at my local community college in the Fall of 2018. I took the course
+because I really like working with computers and technology and I just wanted to know more
+about how programming works. There are so many small problems at work that I just knew could be
+solved with programming, but I didn't know where to start. After my course at the college, I was
+able to start tackling these smaller issues with coding, like making students schedules for testing
+days and creating a single page app to promote school fundraisers.
+
+>What interests you in this role?
+
+I am interested infinding a role where I can really dive into developing my technical skills and
+working as part of a strong and cohesive team. 
+
+>Why do you want to work for this company?
+
+Hopefully be able to list concrete things that they've done here...
+
+>Tell me about one of your accomplishments.
+
+I completed Bloc's Web Developer program in six months, culminating in my Capstone Project.
+Explain project here and how many people use it and why it's good and I'm proud.
+Tell me about a project you’ve done that you are proud of.
+
+>Tell me about a challenge you overcame.
+
+I have always been a perfectionist and it's caused significant anxiety as an adult. I never learned
+how to deal with these tendencies when I was growing up, but started to run into them in my 
+continued studies and my professional life. I noticed that I was missing out on a lot of opportunities
+simply because I was avoiding anything that I knew I wouldn't be 100% successful at. It was either a 0 
+or a 10 for me for every single thing. Then, one day, I started playing a game with some friends and
+was having a lot of fun, but mostly failing and losing and just generally not understanding how it worked.
+I took the time necessary to learn to play and realized that it was okay to be only kind of good at it, that
+I could still enjoy it and have fun. It was then that I started to think that maybe I could apply this to
+other things in my life. Since then, I've learned to code, joined my local tennis league, and started
+a murder mystery writing group. I'm not the best programmer in the world, and I think I might be one of
+the worst tennis players on my team, and while I'm a pretty strong writer, murder mystery is a totally new
+genre for me and it's difficult to navigate! I'm finally comfortable sitting in the uncomfortable space of
+learning something new and difficult. It took a long time to learn how to do that, but I'm so thankful that 
+I did.
+
+>Tell me about a time that you had a conflict with a colleague.
+
+The grade level team I work with the most at school had fallen into this trap of negativite talk. Team meetings had
+become a time to complain about specific students and share stories of their failures rather than celebrate
+their success or explore ways to support them. At first, I tried to address this at a meeting by bringing up
+some instances of these students' success and redirecting negative talk toward positivity. When more negative
+talk continued to come up in meetings, I met privately with my supervisor to discuss how we could redirect team
+talk to be more positive. She decided to add a topic to our weekly professional development schedule that focused
+on monitoring our talk about students, even when they're not around. The professional development went well, but 
+I really wanted to focus on this idea of not just NOT talkng negatively about students, but to encourage positive
+talk and celebration of student strengths as a norm when colleagues talk to each other. I approached the team lead
+of another grade level team who I know is very focused on this as well, and she agreed to host a book discussion group
+for my team. The book we chose, Choice Words by Peter Johnston, illustrates different strategies for talking to and about
+students in a way that highlights their strengths and successes both in the classroom an in the Teacher's Lounge.
+I've noticed that talk about students has become significantly more positive in the last quarter since I started addressing
+this problem with my teammates.
+
+>What’s the most important thing you learned at Bloc?
+
+I learned that time management is very important. Prioritizing my tasks and allowing sufficient time to finish
+each one on a schedule allowed me to complete the program two months ahead of schedule.
+
+>What unique qualities do you bring to this team?
+
+My experience as an educator has allowed me to develop a unique view on learning new things as well as ways in 
+which others learn. I know a lot about different ways to approach problems, and can recognize quickly when something
+isn't working as expected and try to approach it from a different angle.
+
+>What’s your biggest weakness?
+
+I'm still a perfectionist at heart. My initial feeling when facing down something difficult is an immense fear
+of failure and an intense want to give up before I start. However, I've become very familiar with these feelings
+and can recognize them before they start. While I do always put my best effort forward, I'm working to become someone
+who can be comfortable with the reality of what is MY best work.
+
+>What’s important to you when thinking about where you work?
+
+I want to work with a strong team of people who are good at communicating with each other, good at setting deadlines
+and working hard to meet them, and keeping a healthy amount of structure in their day-to-day work.
+
+>Where do you see yourself in five years?
+
+Continuing to work as a developer and learning new technologies. In five years, I would like to have chosen
+a specific language to dive deep into and have several projects that I am passionate about maintaining. I'd
+also like to be a real voice in educational technology that speaks to progressive reading and writing educators
+who'd like to really embrace technology to enhance our students' literate lives.
